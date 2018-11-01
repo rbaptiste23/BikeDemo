@@ -83,8 +83,10 @@ public class BikeService {
 		
 		
 		
-		return customerRepository.findModelMx300And400();
-		//return customerRepository.findModelMx200("XM300");
+		//return customerRepository.findModelMx300And400();
+		
+		// I want the model XM300
+		return customerRepository.findModelMx200("XM300");
 		
 		 
 	}
