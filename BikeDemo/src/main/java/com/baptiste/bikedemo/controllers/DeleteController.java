@@ -26,7 +26,7 @@ public class DeleteController {
 
 		// delete information 
 		
-		
+		// comment number 2 for delete controller 
 		return "bikelistdeleteform";
 	}
 	
