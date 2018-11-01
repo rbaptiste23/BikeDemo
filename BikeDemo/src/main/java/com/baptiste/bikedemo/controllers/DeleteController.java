@@ -24,6 +24,7 @@ public class DeleteController {
 		//System.out.println(bike);
 		//bikeRepository.delete(bike);
 
+		// delete information 
 		
 		
 		return "bikelistdeleteform";
