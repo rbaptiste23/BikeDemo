@@ -1,0 +1,20 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: orange;
+	font-size: 20px;
+	color: white;
+}
+
+table, th, td {
+	border: 1px solid black;
+	text-align: left;
+}
+
+ 
+
+.formtable {
+	background-color: orange;
+	font-size: 20px;
+	color: white;
+}
