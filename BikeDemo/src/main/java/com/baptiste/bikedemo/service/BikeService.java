@@ -72,22 +72,18 @@ public class BikeService {
 		//String query = "Select a, b  from Customer a INNER JOIN a.model b";
 		
 		
-		
 		//return customerRepository.findAllCustomerReports();
 		
 		//return customerRepository.findCustRiley();
 		
-		//return customerRepository.findAll();
+	
 		
  
+		//return customerRepository.findModelByModel("XM300");
 		
+		//return customerRepository.findModelMx200And400();
 		
-		
-		//return customerRepository.findModelMx300And400();
-		
-		// I want the model XM300
-		return customerRepository.findModelMx200("XM300");
-		
+		return customerRepository.findAll();
 		 
 	}
 	

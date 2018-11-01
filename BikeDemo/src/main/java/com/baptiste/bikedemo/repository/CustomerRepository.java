@@ -13,13 +13,13 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 
 	
 	@Query("Select c from Customer c Where c.model = :model")
-	List<Customer> findModelMx200(String model);
+	List<Customer> findModelByModel(String model);
 	
 	@Query("Select c.name, c.model, b.email, b.serialNumber, b.phone from Customer c, Bike b Where c.model = b.model")
 	List<Customer> findCustRiley();
 	
 	
 	@Query("Select c from Customer c Where c.model in ('XM200','XM400') ")
-	List<Customer> findModelMx300And400();
+	List<Customer> findModelMx200And400();
 	
 }

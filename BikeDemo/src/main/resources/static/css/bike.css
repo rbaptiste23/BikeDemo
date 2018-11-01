@@ -1,14 +1,15 @@
 @charset "ISO-8859-1";
 
 body {
-	background-color: orange;
+	background-color: green;
 	font-size: 20px;
 	color: white;
 }
 
 table, th, td {
 	border: 1px solid black;
-	text-align: left;
+	text-align: left; 
+	width: auto;
 }
 
  

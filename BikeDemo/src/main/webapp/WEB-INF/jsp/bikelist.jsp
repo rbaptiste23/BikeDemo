@@ -14,64 +14,37 @@
 </head>
 <body>
 
-	Request Attribute
-	<%=request.getAttribute("customerlist")%>
+
 
 	Customer List:
 	<table>
 		<tr>
-			<th>Id</th>
 			<th>Name</th>
 			<th>Email</th>
 			<th>Phone</th>
-			<th>Model</th>
 			<th>Bike Information</th>
 
 		</tr>
-		<%-- 		<c:forEach var="bike" items="${bikelist}">
-			<tr>
-				<td><c:out value="${bike.id}" /></td>
-				<td><c:out value="${bike.name}" /></td>
-				<td><c:out value="${bike.email}" /></td>
-				<td><c:out value="${bike.phone}" /></td>
-				<td><c:out value="${bike.customer.bike}" /></td>
-				<td><c:out value="${bike.purchaseDate}" /></td>
-			</tr> 
-		</c:forEach>--%>
 
 		<c:forEach var="clist" items="${customerlist}">
 			<tr>
 
-				<%-- 			</td>
-			
-				<td><c:out value="${clist.email}" /></td>  --%>
-				<td><c:out value="${clist.bike}" /></td>
-				<td><c:out value="${clist.phone}" /></td>
 
 				<td><c:out value="${clist.name}" /></td>
-
-				<%--<td><c:out value="${clist.serialNumber}" /> </td> --%>
-				<%--<td><c:out value="${clist.name}" /></td>
-				<td><c:out value="${clist.model}" /></td>
 				<td><c:out value="${clist.email}" /></td>
-				<td><c:out value="${clist.serialNumber}" /></td>
-				<td><c:out value="${clist.phone}" /></td> --%>
-
-
-			</tr>
-
-			<tr>
-				<c:forEach var="blist" items="${clist.bike}">
-					<td><c:out value="${blist.serialNumber}" /></td>
-					<td><c:out value="${blist.purchasePrice}" /></td>
-					<td><c:out value="${blist.purchaseDate}" /></td>
-					<td><c:out value="${blist.email}" /></td>
-				</c:forEach>
-
-			</tr>
-
-
-		</c:forEach>
+				<td><c:out value="${clist.phone}" /></td>
+				<tr>
+ 				<c:forEach var="blist" items="${clist.bike}"> 
+ 				    <tr>
+ 				        <td></td><td></td><td></td> 
+ 						<td><c:out value="${blist.serialNumber}" /></td> 
+ 						<td><c:out value="${blist.purchasePrice}" /></td> 
+ 						<td><c:out value="${blist.purchaseDate}" /></td>
+ 						<td><c:out value="${blist.model}" /></td>
+ 				     </tr> 
+ 					</c:forEach> 
+ 				</tr>
+ 			</c:forEach> 
 	</table>
 
 	<form>
