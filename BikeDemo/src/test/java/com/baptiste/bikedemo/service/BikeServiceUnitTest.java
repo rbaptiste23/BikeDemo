@@ -1,9 +1,13 @@
 package com.baptiste.bikedemo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,9 +19,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -31,14 +33,11 @@ import com.baptiste.bikedemo.repository.PagingRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @WebAppConfiguration
-public class BikeServiceTest {
-
-	@InjectMocks
-	BikeService bikeService;
-
+public class BikeServiceUnitTest {
+	
 	@Mock
-	BikeRepository bikeRepository;
-
+    BikeRepository bikeRepository;
+	
 	@Mock
 	CustomerRepository customerRepository;
 
@@ -50,6 +49,9 @@ public class BikeServiceTest {
 	
 	@Mock
 	EntityManager entityManager;
+	
+	@InjectMocks
+	BikeService bikeService;
 
 //	@Before
 //	void setUp() throws Exception{
@@ -70,13 +72,19 @@ public class BikeServiceTest {
 		List<Bike> bikeList = new ArrayList<Bike>();
 		bikeList.add(bike1);
 
+		
 		when(bikeRepository.findAll()).thenReturn(bikeList);
-		assertThat(bikeService.getAllBikes()).isNotEqualTo(null);
+		verify(bikeRepository,times(1)).findAll();				
+		//assertEquals(65,bikeService.getAllBikes().size());		
 	}
 
+	
 	@Test
 	public void testGetCDate() {
-		assertThat(bikeService.getCDate()).isEqualTo("10/25/2018");
+		String currentDate; 
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		currentDate = sdf.format(new Date());				
+		assertThat(bikeService.getCDate()).isEqualTo(currentDate);
 	}
 	
 	

@@ -43,7 +43,7 @@ public class SaveController {
 	//Update 
 	@PostMapping()
 	public String updateNoParmEvent(@ModelAttribute("Bike") Bike bike) {		
-		bikeRepository.save(bike);
+		bikeService.saveBike(bike);
 		return "bikelistsaveform";
 	}
 	

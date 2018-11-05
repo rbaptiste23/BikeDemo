@@ -69,20 +69,18 @@ public class BikeService {
 		
 		//String query = "select t from Customer t order by t.model desc";
 		//String query = "select t from Customer t where t.model in ('XM200','XM600') ";
-		//String query = "Select a, b  from Customer a INNER JOIN a.model b";
-			
-		//return customerRepository.findAllCustomerReports();
-		
+		//String query = "Select a, b  from Customer a INNER JOIN a.model b";			
+		//return customerRepository.findAllCustomerReports();		
 		//return customerRepository.findCustRiley();
- 
 		//return customerRepository.findModelByModel("XM300");
+		//return customerRepository.findAll();
 		
-		//return customerRepository.findModelMx200And400();
-		
-		return customerRepository.findAll();
-		 
+		return customerRepository.findModelMx200And400();		 
 	}
 	
+	public void saveBike(Bike bike) {
+		bikeRepository.save(bike);
+	}
 	
 	
 }

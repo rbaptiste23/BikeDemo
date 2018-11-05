@@ -37,6 +37,8 @@
 						formaction="http://localhost:8080/Save">Update Bike</Button></td>
 				<td><Button type="submit" name="blist" formmethod="get"
 						formaction="http://localhost:8080/Delete">Delete Bike</Button></td>
+				<td><Button type="submit" name="blist" formmethod="get"
+						formaction="http://localhost:8080/logout">Logout</Button></td>
 
 			</tr>
 		</table>

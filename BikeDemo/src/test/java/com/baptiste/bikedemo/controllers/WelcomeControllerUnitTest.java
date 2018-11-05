@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = WelcomeController.class, secure = false)
-public class WelcomeControllerTest {
+public class WelcomeControllerUnitTest {
 
 	@Autowired
 	private MockMvc mockMvc; 

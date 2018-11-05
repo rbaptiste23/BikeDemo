@@ -44,17 +44,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
  
 			httpSecurity.authorizeRequests()
 			           
-			           .antMatchers("/rest/**").hasRole("USER") 
+			           .antMatchers("/rest/**","/Display","/logout").hasRole("USER") 
+			           .antMatchers("/Create", "/Save", "/Delete", "/logout").hasRole("ADMIN")
 			           .anyRequest()
 			           //.permitAll()			    
 			           .fullyAuthenticated()            
 			           .and().httpBasic();
+		
 			
-			
-			httpSecurity.formLogin().loginPage("/login").permitAll(); 			           			           			         				     
+			httpSecurity.formLogin().loginPage("/login").permitAll(); 	
+            httpSecurity.logout();	           			           			         				     
 			           			          
 			httpSecurity.csrf().disable();
 			
+			
+			
+			
+//			httpSecurity
+//		        .logout()                                                                
+//		            .logoutUrl("/my/logout")                                                 
+//		            .logoutSuccessUrl("/my/index")                                           
+//		            .logoutSuccessHandler(logoutSuccessHandler)                              
+//		            .invalidateHttpSession(true)                                             
+//		            .addLogoutHandler(logoutHandler)                                          
+//		            .deleteCookies(cookieNamesToClear)                                       
+//		            .and()
  
 	}		   
 }
