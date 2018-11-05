@@ -21,8 +21,6 @@ import com.baptiste.bikedemo.service.BikeService;
 @RequestMapping("/Create")
 public class CreateController {
 	
-	@Autowired
-	BikeRepository bikeRepository;
 	
 	@Autowired 
 	BikeService bikeService;
@@ -47,7 +45,7 @@ public class CreateController {
         	return "bikelistcreateform";        
         }
 	    
-		bikeRepository.save(bike);			
+	    bikeService.saveBike(bike);			
 		model.addAttribute("bikelist", this.bikeService.getAllBikes());	
 		 
 		 

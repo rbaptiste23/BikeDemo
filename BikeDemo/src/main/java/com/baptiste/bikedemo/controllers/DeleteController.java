@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baptiste.bikedemo.model.Bike;
 import com.baptiste.bikedemo.repository.BikeRepository;
+import com.baptiste.bikedemo.service.BikeService;
 
 @Controller
 @RequestMapping("/Delete")
@@ -17,6 +18,10 @@ public class DeleteController {
 	
 	@Autowired
 	BikeRepository bikeRepository;
+	
+	@Autowired
+	BikeService bikeService;
+	
 	
  
 	@GetMapping
@@ -45,7 +50,7 @@ public class DeleteController {
 	@PostMapping()
 	public String deleteNoEvent(@ModelAttribute("Bike") Bike bike) {
 		//System.out.println(bike);
-		bikeRepository.delete(bike);
+		bikeService.deleteBike(bike);
 		return "bikelistdeleteform";
 	}
 	

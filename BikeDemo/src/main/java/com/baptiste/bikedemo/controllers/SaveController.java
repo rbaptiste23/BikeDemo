@@ -16,9 +16,6 @@ import com.baptiste.bikedemo.service.BikeService;
 @RequestMapping("/Save")
 public class SaveController {
 
-	@Autowired
-	BikeRepository bikeRepository;
-	
 	@Autowired 
 	BikeService bikeService;
 	
@@ -36,7 +33,7 @@ public class SaveController {
 //	@PostMapping("/{id}")
 //	public String updateEvent(@PathVariable("id") long id, @ModelAttribute("Bike") Bike bike) {
 //		System.out.println(bike);
-//		bikeRepository.save(bike);
+//		bikeService.saveBike(bike);
 //		return "bikelistsaveform";
 //	}
 	

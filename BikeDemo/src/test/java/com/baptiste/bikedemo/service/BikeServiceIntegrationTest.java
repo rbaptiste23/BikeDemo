@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,14 +68,16 @@ public class BikeServiceIntegrationTest {
 	}
 	
 	@Test
+	//@Transactional
 	public void testSaveBike() {
  			
 		Bike bike = new Bike();
-		bike.setEmail("jDoe@yahoo.com");
-		bike.setName("Jane Doe");
+		bike.setEmail("bjackson@yahoo.com");
+		bike.setName("Bobby Jackson");
 		bike.setPurchasePrice(new BigDecimal(508.23));
 		bike.setSerialNumber("SN9876543210");
 		bike.setPhone("405-448-8747");
+		bike.setModel("XM300");
 		bike.setPurchaseDate(new Date());
 	
 		
@@ -81,7 +85,7 @@ public class BikeServiceIntegrationTest {
 		
 		assertNotNull(bike);
 		assertNotNull(bike.getEmail());
-		assertEquals("Jane Doe", bike.getName());
+		assertEquals("Bobby Jackson", bike.getName());
 	}
 	
 	

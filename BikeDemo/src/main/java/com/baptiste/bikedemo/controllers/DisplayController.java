@@ -20,12 +20,7 @@ import com.baptiste.bikedemo.service.BikeService;
 @Controller
 @RequestMapping("/Display")
 public class DisplayController {
-	
-	@Autowired
-	BikeRepository bikeRepository;
-	
-	@Autowired
-	PagingRepository pagingRepository;
+ 
 	
 	@Autowired 
 	BikeService bikeService;
@@ -52,7 +47,7 @@ public class DisplayController {
 	@GetMapping("/{id}")
 	public String getEvent(@PathVariable("id") long id, @ModelAttribute("Bike") Bike bike) {
 		System.out.println(bike);
-		bikeRepository.save(bike);
+		bikeService.saveBike(bike);
 		return "bikelist";
 	}
 	

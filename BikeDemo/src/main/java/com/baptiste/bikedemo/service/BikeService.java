@@ -82,5 +82,9 @@ public class BikeService {
 		bikeRepository.save(bike);
 	}
 	
+	public void deleteBike(Bike bike) {
+		bikeRepository.delete(bike);
+	}
+	
 	
 }
