@@ -1,4 +1,4 @@
-package com.baptiste.bikedemo.controllers;
+package com.baptiste.bikedemo.controllers.IntegrationTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.baptiste.bikedemo.controllers.WelcomeController;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = WelcomeController.class, secure = false)

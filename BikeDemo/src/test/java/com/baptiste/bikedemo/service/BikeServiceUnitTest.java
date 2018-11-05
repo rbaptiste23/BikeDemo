@@ -1,10 +1,12 @@
 package com.baptiste.bikedemo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,14 +14,20 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -33,6 +41,7 @@ import com.baptiste.bikedemo.repository.PagingRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @WebAppConfiguration
+@SpringBootTest(webEnvironment = WebEnvironment.NONE)
 public class BikeServiceUnitTest {
 	
 	@Mock
@@ -61,21 +70,25 @@ public class BikeServiceUnitTest {
 	@Test
 	public void testGetAllBikes() {
 
-		Bike bike1 = new Bike();
-
-		bike1.setContact(true);
-		bike1.setEmail("riley.bap@outlook.com");
-		bike1.setModel("MX200");
-		bike1.setPhone("444-22-3232");
-		bike1.setSerialNumber("SN123456");
-
-		List<Bike> bikeList = new ArrayList<Bike>();
-		bikeList.add(bike1);
-
 		
-		when(bikeRepository.findAll()).thenReturn(bikeList);
-		verify(bikeRepository,times(1)).findAll();				
-		//assertEquals(65,bikeService.getAllBikes().size());		
+		List<Bike> aMockBikeList = new ArrayList<Bike>();
+		Bike aMockBike = new Bike();
+
+		aMockBike.setContact(true);
+		aMockBike.setEmail("bjackson@yahoo.com");
+		aMockBike.setName("Bobby Jackson");
+		aMockBike.setPurchasePrice(new BigDecimal(508.23));
+		aMockBike.setSerialNumber("SN9876543210");
+		aMockBike.setPhone("405-448-8747");
+		aMockBike.setModel("XM300");
+
+		aMockBikeList.add(aMockBike);
+		
+		when(bikeRepository.findAll()).thenReturn(aMockBikeList);
+				
+		List<Bike> returnBike = bikeService.getAllBikes();
+		
+	    assertEquals(1,returnBike.size());		
 	}
 
 	
@@ -89,38 +102,40 @@ public class BikeServiceUnitTest {
 	
 	
 
-//	@SuppressWarnings("unchecked")
 //	@Test
 //	public void testGetBike() {
+//		int pageNumber = 3;
+//		int PAGESIZE = 4; 
 //		
-//		Bike bike1 = new Bike();
+//		
+//		Page<Bike> aMockPageList = (Page<Bike>) new ArrayList();
+//		
+//		Bike aMockBike = new Bike();
 //
-//		bike1.setContact(true);
-//		bike1.setEmail("riley.bap@outlook.com");
-//		bike1.setModel("MX200");
-//		bike1.setPhone("444-22-3232");
-//		bike1.setSerialNumber("SN123456");
+//		aMockBike.setContact(true);
+//		aMockBike.setEmail("bjackson@yahoo.com");
+//		aMockBike.setName("Bobby Jackson");
+//		aMockBike.setPurchasePrice(new BigDecimal(508.23));
+//		aMockBike.setSerialNumber("SN9876543210");
+//		aMockBike.setPhone("405-448-8747");
+//		aMockBike.setModel("XM300");
 //
-//		List<Bike> bikeList = new ArrayList<Bike>();
-//		bikeList.add(bike1);
-//		
-//		int pageNumber = 1;
-//		int PAGESIZE = 4;
-//		
-//		PageRequest p = PageRequest.of(pageNumber-1, 4, Sort.Direction.ASC, "id");	
-//		
-//		Page<Bike> pb = "Hello";
-//		
-//	
-//		
-//	
+//		aMockPageList.add(aMockBike);
 //		
 //		
-//	
 //		
-//		when(pagingRepository.findAll(p)).thenReturn(pb);
 //		
-//		Page<Bike> b = bikeService.getBike(1);
+//				
+//
+//			
+//		PageRequest pr = PageRequest.of(pageNumber-1, PAGESIZE, Sort.Direction.ASC, "id");
+//		aMockPageList = pagingRepository.findAll(pr);
+//		
+//		when(pagingRepository.findAll(pr)).thenReturn(aMockPageList);
+//		
+//		Page<Bike> b = bikeService.getBike(pageNumber);
+//		
+//		
 //		assertThat(b).isNotEqualTo(null);
 //		
 //		
@@ -147,16 +162,15 @@ public class BikeServiceUnitTest {
     	  
 	  @Test public void testGet600Customer() { 
 			Customer customer1 = new Customer();
-			String query ="Select c from Customer c";
 
-			customer1.setEmail("riley.bap@outlook.com");
+			customer1.setEmail("rb@outlook.com");
 			customer1.setModel("MX4500");
-			customer1.setName("Riley");		
+			customer1.setName("Nathan");		
 
 			List<Customer> customerList = new ArrayList<Customer>();
 			customerList.add(customer1);
 			
-			when(entityManager.createQuery(query).getResultList()).thenReturn(customerList);
+			when(customerRepository.findModelMx200And400()).thenReturn(customerList);
 			
 			assertThat(bikeService.get600Customer()).isNotEqualTo(null);
 	  
