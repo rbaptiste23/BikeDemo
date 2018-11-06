@@ -16,19 +16,18 @@ import com.baptiste.bikedemo.service.BikeService;
 @RequestMapping("/Save")
 public class SaveController {
 
-	@Autowired 
+	@Autowired
 	BikeService bikeService;
-	
-	
+
 	@GetMapping
-	public String viewForm(Model model) {				
-		//model.addAttribute("bikelist", this.bikeService.getAllBikes());		
-		//model.addAttribute("curDate", bikeService.getCDate());
-		//System.out.println("Returning " + this.bikeService.getAllBikes().size() + " Bikes to bikes.jsp");					
+	public String viewForm(Model model) {
+		// model.addAttribute("bikelist", this.bikeService.getAllBikes());
+		// model.addAttribute("curDate", bikeService.getCDate());
+		// System.out.println("Returning " + this.bikeService.getAllBikes().size() + "
+		// Bikes to bikes.jsp");
 		return "bikelistsaveform";
 	}
-	
- 
+
 //	//Update 
 //	@PostMapping("/{id}")
 //	public String updateEvent(@PathVariable("id") long id, @ModelAttribute("Bike") Bike bike) {
@@ -36,12 +35,16 @@ public class SaveController {
 //		bikeService.saveBike(bike);
 //		return "bikelistsaveform";
 //	}
-	
-	//Update 
+
+	// Update
 	@PostMapping()
-	public String updateNoParmEvent(@ModelAttribute("Bike") Bike bike) {		
-		bikeService.saveBike(bike);
-		return "bikelistsaveform";
+	public String updateNoParmEvent(@ModelAttribute("Bike") Bike bike) {
+		
+		if (bikeService.saveBike(bike)) {
+		  return "bikelistsaveform";
+		} else {
+		 return "failure";
+		}
 	}
-	
+
 }

@@ -78,8 +78,14 @@ public class BikeService {
 		return customerRepository.findModelMx200And400();		 
 	}
 	
-	public void saveBike(Bike bike) {
-		bikeRepository.save(bike);
+	public Boolean saveBike(Bike bike) {
+		if (bike.getPurchasePrice() != null && bike.getSerialNumber() != null && bike.getPhone() != null) {
+			bikeRepository.save(bike);
+			return true;
+		} else {
+			return false; 
+		}
+	 		
 	}
 	
 	public void deleteBike(Bike bike) {
