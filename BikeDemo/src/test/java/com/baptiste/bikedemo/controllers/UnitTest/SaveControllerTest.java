@@ -1,73 +1,62 @@
 package com.baptiste.bikedemo.controllers.UnitTest;
 
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
-import java.math.BigDecimal;
-import java.util.Date;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 
 import com.baptiste.bikedemo.controllers.SaveController;
-import com.baptiste.bikedemo.model.Bike;
 import com.baptiste.bikedemo.service.BikeService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(SaveController.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class SaveControllerTest {
 
-   @Autowired 
-   private MockMvc mockMvc;
-   
-   
-   @MockBean
-   private BikeService bikeService; 
-   
-   @MockBean 
-   SaveController saveController; 
-   
-   
+	@Autowired
+	SaveController saveController;
+
+	@Autowired
+	private BikeService bikeService;
+
+	@Autowired
+	private MockMvc mockMvc;
 	
-	@Before 
+	@Mock
+	Model model;
+
+	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-	}
-	
-	@Test
-	void testViewForm() {
-		fail("Not yet implemented");
+		mockMvc = MockMvcBuilders.standaloneSetup(saveController)
+				.build();
 	}
 
 	@Test
-	void testUpdateNoParmEvent() throws Exception {
-		Bike mockBike = new Bike();
-		
-		mockBike.setEmail("bjackson@yahoo.com");
-		mockBike.setName("Bobby Jackson");
-		mockBike.setPurchasePrice(new BigDecimal(508.23));
-		mockBike.setSerialNumber("SN9876543210");
-		mockBike.setPhone("405-448-8747");
-		mockBike.setModel("XM300");
-		mockBike.setPurchaseDate(new Date());
-		
-		when(bikeService.saveBike(mockBike)).thenReturn(true);
-		
-		// simulate the ofrm bean that would POST from the web page..
-		
-		mockMvc
-		      .perform(post("/Save",null));
-		
-		
-		
+	void testViewFormNotNull() {
+		String outcome = saveController.viewForm(model);
+		assertThat(outcome, is(equalTo("bikelistsaveform")));
+
 	}
+
+	@Test
+	void testViewFormNull() {
+		String outcome = saveController.viewForm(null);
+		assertThat(outcome, is(equalTo("bikelistsaveform")));
+
+	}
+
+
 
 }

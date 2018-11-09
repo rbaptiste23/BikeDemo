@@ -88,8 +88,18 @@ public class BikeService {
 	 		
 	}
 	
-	public void deleteBike(Bike bike) {
-		bikeRepository.delete(bike);
+	public boolean deleteBike(Bike bike) {
+		try {
+			bikeRepository.delete(bike);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+ 
+			
+ 
+		
 	}
 	
 	

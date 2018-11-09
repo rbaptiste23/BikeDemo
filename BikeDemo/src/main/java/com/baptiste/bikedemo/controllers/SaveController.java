@@ -25,7 +25,12 @@ public class SaveController {
 		// model.addAttribute("curDate", bikeService.getCDate());
 		// System.out.println("Returning " + this.bikeService.getAllBikes().size() + "
 		// Bikes to bikes.jsp");
-		return "bikelistsaveform";
+		if (model == null) {
+			return "error";
+		} else {
+			return "bikelistsaveform";
+		}
+		
 	}
 
 //	//Update 

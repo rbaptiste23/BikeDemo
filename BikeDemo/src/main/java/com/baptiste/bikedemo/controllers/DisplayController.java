@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.baptiste.bikedemo.model.Bike;
-import com.baptiste.bikedemo.repository.BikeRepository;
-import com.baptiste.bikedemo.repository.PagingRepository;
 import com.baptiste.bikedemo.service.BikeService;
 
 @Controller

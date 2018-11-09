@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -39,13 +40,12 @@ public class BikeRepositoryTest {
 
 	@Test
 	public void testFindAll() {
-		fail("Not yet implemented");
+		List<Bike> bike = bikeRepository.findAll();
+		assertNotNull(bike);
+		
 	}
 
-	@Test
-	public void testFindAllByIdIterableOfID() {
-		fail("Not yet implemented");
-	}
+
 
 	@Test
 	public void testGetOne() {

@@ -1,6 +1,8 @@
 package com.baptiste.bikedemo.controllers.UnitTest;
 
-import static org.junit.Assert.fail;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,6 +24,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 
 import com.baptiste.bikedemo.controllers.CreateController;
 import com.baptiste.bikedemo.model.Bike;
@@ -35,20 +39,25 @@ public class CreateControllerTest {
 
 	@MockBean
 	BikeService bikeService;
+	
+	@Mock
+	Model model;
+	
 
 	@InjectMocks
-	CreateController createController;
+	CreateController underTest;
 
 	@Before
 	public void init() {
 		MockitoAnnotations.initMocks(this);
-		mockMvc = MockMvcBuilders.standaloneSetup(createController)
+		mockMvc = MockMvcBuilders.standaloneSetup(underTest)
 				.build();
 	}
 
 	@Test
 	public void testViewForm() {
-		fail("Not yet implemented");
+	   String outcome = underTest.viewForm(model);
+	   assertThat(outcome, is(equalTo("bikelistcreateform")));
 	}
 
 	@Test
@@ -68,7 +77,9 @@ public class CreateControllerTest {
 		mockBike.setPurchaseDate(new Date());
 
 		// Mocking the Service saving the bike..
-		when(bikeService.saveBike(mockBike)).thenReturn(true);
+		//when(bikeService.saveBike(mockBike)).thenReturn(true);
+		//when(bikeService.saveBike(mockBike)).thenReturn(false);
+		when(bikeService.saveBike(null)).thenReturn(false);
 
 		// Simulate the form bean that would POST from the web page.
 		Bike aBike = new Bike();

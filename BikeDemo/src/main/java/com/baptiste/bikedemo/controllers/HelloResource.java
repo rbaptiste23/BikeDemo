@@ -22,7 +22,7 @@ public class HelloResource {
 
 		System.out.println(username);
 
-		if (userDetails.isEnabled()) {
+		if (userDetails.isEnabled()) { 
 			System.out.println("User is enabled.");
 		} else {
 			System.out.println("User is not enabled.");
