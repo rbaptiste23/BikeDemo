@@ -24,7 +24,7 @@ public class LoginTest {
 	@Test
 	public void testLogin() {		
 		String outcome = loginController.login();
-		assertThat(outcome, is(equalTo("bikelistcreateform")));
+		assertThat(outcome, is(equalTo("login"))); 
 	}
 
 }

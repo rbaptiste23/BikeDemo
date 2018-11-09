@@ -33,7 +33,7 @@ public class BikeServiceIntegrationTest {
 	public void testGetAllBikes() {
 		List<Bike> bikes = bikeService.getAllBikes();
 		assertNotNull(bikes);
-		
+
 	}
 
 	@Test
@@ -66,11 +66,11 @@ public class BikeServiceIntegrationTest {
 		assertNotNull(customer);
 		assertEquals(2, customer.size());
 	}
-	
+
 	@Test
-	//@Transactional
+	// @Transactional
 	public void testSaveBike() {
- 			
+
 		Bike bike = new Bike();
 		bike.setEmail("bjackson@yahoo.com");
 		bike.setName("Bobby Jackson");
@@ -79,15 +79,56 @@ public class BikeServiceIntegrationTest {
 		bike.setPhone("405-448-8747");
 		bike.setModel("XM300");
 		bike.setPurchaseDate(new Date());
-	
-		
+
 		bikeService.saveBike(bike);
-		
+
 		assertNotNull(bike);
 		assertNotNull(bike.getEmail());
 		assertEquals("Bobby Jackson", bike.getName());
 	}
 	
 	
+	@Test
+	// @Transactional
+	public void testSaveBikeError() {
 
+		Bike bike = new Bike();
+		bike.setEmail("bjackson@yahoo.com");
+		bike.setName("Bobby Jackson");
+		//bike.setPurchasePrice(new BigDecimal(508.23));
+		bike.setSerialNumber("SN9876543210");
+		bike.setPhone("405-448-8747");
+		bike.setModel("XM300");
+		bike.setPurchaseDate(new Date());
+
+		bikeService.saveBike(bike);
+
+		assertNotNull(bike);
+		assertNotNull(bike.getEmail());
+		assertEquals("Bobby Jackson", bike.getName());
+	}
+
+	@Test
+	@Transactional
+	public void testDeleteBike() {
+
+		Bike bike = new Bike();
+		bike.setId(182L);
+
+		bikeService.deleteBike(bike);
+
+		assertNotNull(bike);
+	}
+
+	@Test
+	@Transactional
+	public void testDeleteBikeException() {
+
+		Bike bike = new Bike();
+		bike.setId(1822L);
+
+		bikeService.deleteBike(bike);
+
+		assertNotNull(bike);
+	}
 }

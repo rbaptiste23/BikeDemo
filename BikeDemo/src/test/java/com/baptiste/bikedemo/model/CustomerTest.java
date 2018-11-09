@@ -1,14 +1,15 @@
 package com.baptiste.bikedemo.model;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,103 +18,70 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CustomerTest {
 
-
-	@Mock
 	Customer customer;
 
+	Bike bike;
+	List<Bike> bikeList;
 
-		
-	
+	@Before
+	public void init() {
+		customer = new Customer();
+		bike = new Bike();
+		bikeList = new ArrayList<Bike>();
+
+	}
 
 	@Test
 	public void testGetSsi() {
-//		List<Bike> bikeList = new ArrayList<Bike>();
-//		List<Customer> cust = new ArrayList<Customer>();
-//		
-//  		Bike bike = new Bike();
-//  		bike.setEmail("bjackson@yahoo.com");
-//  		bike.setName("Bobby Jackson");
-//  		bike.setPurchasePrice(new BigDecimal(508.23));
-//  		bike.setSerialNumber("SN9876543210");
-//  		bike.setPhone("405-448-8747");
-//  		bike.setModel("XM300");
-//  		bike.setPurchaseDate(new Date());
-//  		
-//  		bikeList.add(bike);
-//  		
-//  		
-//  		
-//  		customer.setEmail("george@yahoo.com");
-//  		customer.setModel("MX500");
-//  		customer.setName("John Doe");
-//  		customer.setPhone("405-778-1487");
-//  		customer.setSsi("615-87-1578");
-//  		customer.setBike(bikeList);
-		
-		when(customer.getSsi()).thenReturn("557-78-1187");
+		customer.setSsi("444-44-4444");
 		String outcome = customer.getSsi();
-		assertNotNull(outcome);
+		assertEquals("444-44-4444", outcome);
 	}
 
 	@Test
 	public void testGetName() {
+		customer.setName("Johnny Appleseed");
 		String outcome = customer.getName();
-		assertNotNull(outcome);
+		assertEquals("Johnny Appleseed", outcome);
 	}
 
 	@Test
 	public void testGetEmail() {
+		customer.setEmail("jappleseed@yahoo.com");
 		String outcome = customer.getEmail();
-		assertNotNull(outcome);
+		assertEquals("jappleseed@yahoo.com", outcome);
 	}
-	
+
 	@Test
 	public void testGetModel() {
+		customer.setModel("MX200");
 		String outcome = customer.getModel();
-		assertNotNull(outcome);
+		assertEquals("MX200", outcome);
 	}
 
 	@Test
 	public void testGetPhone() {
+		customer.setPhone("405-781-4872");
 		String outcome = customer.getPhone();
-		assertNotNull(outcome);
+		assertEquals("405-781-4872", outcome);
 	}
-
 
 	@Test
 	public void testGetBike() {
+
+		bike.setEmail("bjackson@yahoo.com");
+		bike.setName("Bobby Jackson");
+		bike.setPurchasePrice(new BigDecimal(508.23));
+		bike.setSerialNumber("SN9876543210");
+		bike.setPhone("405-448-8747");
+		bike.setModel("XM300");
+		bike.setPurchaseDate(new Date());
+
+		bikeList.add(bike);
+
+		customer.setBike(bikeList);
 		List<Bike> bikeFinal = customer.getBike();
-		assertNotNull(bikeFinal);
-	}
-	
-	
-	@Test
-	public void testSetSsi() {
-		fail("Not yet implemented");
-	}
-	
-	
-	@Test
-	public void testSetEmail() {
-		fail("Not yet implemented");
-	}
-
-
-	@Test
-	public void testSetModel() {
-		fail("Not yet implemented");
-	}
-
-
-	@Test
-	public void testSetPhone() {
-		fail("Not yet implemented");
-	}
-
-
-	@Test
-	public void testSetBike() {
-		fail("Not yet implemented");
+		assertEquals(bikeList, bikeFinal);
 	}
 
 }
